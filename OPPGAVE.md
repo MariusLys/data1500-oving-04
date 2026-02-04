@@ -28,7 +28,22 @@ I et klasserom kan studentene lese beskjeder fra læreren. Hvert klasserom har o
 **Oppgave:** Beskriv en konseptuell datamodell (med tekst eller ER-diagram) for systemet. Modellen skal kun inneholde entiteter, som du har valgt, og forholdene mellom dem, med kardinalitet. Du trenger ikke spesifisere attributter i denne delen.
 
 **Ditt svar:***
+- Datamodellen ser ut til å være bygget opp av brukere (lærere og studenter), klasserom, grupper, beskjeder og forum-innlegg. 
+- En lærer er ansvarlig for ett eller flere klasserom, og hvert klasserom skal ha en ansvarlig lærer. Brukere kan organiseres i grupper, der en gruppe kan bestå av flere brukere, og en bruker kan være medlem av flere grupper. Grupper kan få tilgang til ett eller flere klasserom.
+- I hvert klasserom kan læreren publisere beskjeder som studentene kan lese. Klasserommet inneholder også et diskusjonsforum der både lærere og studenter kan skrive innlegg. Innlegg kan besvares av andre innlegg, slik at det dannes en hierarkisk trådstruktur.
+```mermaid
+   erDiagram
+    BRUKER ||--o{ KLASSEROM : "ansvarlig"
+    KLASSEROM ||--o{ BESKJED : "har"
+    BRUKER ||--o{ BESKJED : "sender"
 
+    KLASSEROM ||--o{ INNLEGG : "har"
+    BRUKER ||--o{ INNLEGG : "skriver"
+    INNLEGG ||--o{ INNLEGG : "svar"
+
+    BRUKER }o--o{ GRUPPE : "medlem"
+    GRUPPE }o--o{ KLASSEROM : "tilgang"
+```
 
 ## Del 2: Logisk Skjema (Tabellstruktur)
 
